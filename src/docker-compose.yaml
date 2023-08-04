@@ -1,0 +1,25 @@
+yaml:
+version: '3'
+services:
+  assignment-api-server:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: assignment-api-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - assignment-database
+
+  assignment-database:
+    build:
+      context: ./src
+      dockerfile: Dockerfile.database
+    container_name: assignment-database
+    ports:
+      - "5000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: your_database_name
+      MYSQL_USER: your_database_user
+      MYSQL_PASSWORD: your_database_password
